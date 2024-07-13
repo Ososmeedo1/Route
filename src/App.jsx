@@ -86,12 +86,12 @@ function App() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">Customer Transactions</h1>
-      <div className="mb-4 p-4 bg-white shadow rounded-lg flex">
-        <div className='w-1/2 p-4'>
-        <label className="block mb-2 text-lg">Filter by customer:</label>
+      <h1 className="fw-bold mb-5 text-center">Customer Transactions</h1>
+      <div className="mb-4 p-4 bg-white shadow flex rounded-5">
+        <div className='p-4 w-50'>
+        <label className="d-block mb-2 fs-3 fw-bold">Filter by customer:</label>
         <select 
-          className="block w-full p-2 border border-gray-300 rounded mb-4" 
+          className="d-block w-100 p-2 border border-secondary rounded-5 mb-4" 
           onChange={(e) => handleFilterCustomerID(e.target.value)}
         >
           <option value="">All</option>
@@ -99,17 +99,17 @@ function App() {
             <option key={customer.id} value={customer.id}>{customer.name}</option>
           ))}
         </select></div>
-        <div className='w-1/2 p-4'>
-        <label className="block mb-2 text-lg">Filter by amount:</label>
+        <div className='w-50 p-4'>
+        <label className="d-block mb-2 fs-3 me-2 fw-bold">Filter by amount:</label>
         <input 
           type="number" 
-          className="block w-full p-2 border border-gray-300 rounded mb-4" 
+          className="d-block w-100 p-2 border border-gray-300 rounded-5 mb-4" 
           onChange={(e) => handleFilterAmount( e.target.value)} 
         /></div>
       </div>
-      <table className="min-w-full bg-white border border-gray-300 shadow rounded-lg">
+      <table className="w-50 bg-white shadow rounded-5 text-center mx-auto">
         <thead>
-          <tr className="bg-blue-600 text-black">
+          <tr className="bg-danger text-white">
             <th className="py-2 px-4 border-b">Customer</th>
             <th className="py-2 px-4 border-b">Date</th>
             <th className="py-2 px-4 border-b">Amount</th>
@@ -117,18 +117,18 @@ function App() {
         </thead>
         <tbody>
           {filteredTransactions.map(transaction => (
-            <tr key={transaction.id} className="hover:bg-gray-100">
-              <td className="py-2 px-4 border-b">{customers.find(customer => customer.id == transaction.customer_id)?.name}</td>
-              <td className="py-2 px-4 border-b">{transaction.date}</td>
-              <td className="py-2 px-4 border-b">{transaction.amount}</td>
+            <tr key={transaction.id}>
+              <td className="py-2 px-4 border-bottom">{customers.find(customer => customer.id == transaction.customer_id)?.name}</td>
+              <td className="py-2 px-4 border-bottom">{transaction.date}</td>
+              <td className="py-2 px-4 border-bottom">{transaction.amount}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <div className="mt-4 p-4 bg-white shadow rounded-lg">
-        <label className="block mb-2 text-lg">Select customer for chart:</label>
+      <div className="mt-4 p-4 bg-white shadow rounded-3">
+        <label className="d-block mb-2 fs-3 fw-bold">Select customer for chart:</label>
         <select 
-          className="block w-full p-2 border border-gray-300 rounded" 
+          className="d-block w-100 p-2 border border-secondary rounded-3" 
           onChange={(e) => handleSelectCustomer(e.target.value)}
         >
           <option value="">None</option>
@@ -137,7 +137,7 @@ function App() {
           ))}
         </select>
       </div>
-      {selectedCustomer && <div className="mt-4 p-4 bg-white shadow rounded-lg">
+      {selectedCustomer && <div className="mt-4 p-4 bg-white shadow rounded-3">
         <canvas ref={chartContainerRef}></canvas>
       </div>}
     </div>
